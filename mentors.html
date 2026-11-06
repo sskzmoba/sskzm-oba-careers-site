@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SSKZM OBA Mentors: ask a senior Kazak, guide a junior one</title>
+<meta name="description" content="A mentoring circle for life members of the SSKZM Old Boys Association. Find a mentor, or offer an hour a month to guide a junior Kazak.">
+<meta name="theme-color" content="#16235c">
+<meta property="og:title" content="SSKZM OBA Mentors">
+<meta property="og:description" content="Ask a senior Kazak. Guide a junior one. For OBA life members.">
+<meta property="og:image" content="assets/img/school-900.jpg">
+<link rel="icon" href="assets/img/favicon-64.png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preload" href="assets/fonts/atkinson-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <img src="assets/img/oba-logo-96.png" alt="" width="40" height="40">
+      <span><b>Careers &amp; Mentors</b><small>SSKZM Old Boys Association</small></span>
+    </a>
+    <nav class="topnav" aria-label="Main">
+      <a href="index.html">Bulletin</a>
+      <a href="share.html">Share a notice</a>
+      <a href="mentors.html" aria-current="page">Mentors</a>
+    </nav>
+    <button class="textsize" id="textsize" type="button" aria-pressed="false" aria-label="Make text bigger">A+</button>
+  </div>
+</header>
+
+<section class="m-hero">
+  <div class="wrap">
+    <h1>Ask a senior Kazak. Guide a junior one.</h1>
+    <p>From SSB interviews to a second career after service, someone from the school has walked that road before. This is a quiet place for OBA life members to find each other and talk.</p>
+    <div class="m-stats" id="m-stats" aria-live="polite"></div>
+  </div>
+</section>
+
+<main class="wrap" id="main">
+  <!-- Logged-out view -->
+  <div id="view-out">
+    <div class="m-grid">
+      <div class="panel">
+        <h2>How it works</h2>
+        <ol class="howto">
+          <li><div><b>Log in with your OBA email</b><span>Use the email the OBA has on record. We send you a 6-digit code; no password to remember.</span></div></li>
+          <li><div><b>Say how you would like to take part</b><span>Offer guidance, ask for it, or both. Pick your areas and how much time you can give.</span></div></li>
+          <li><div><b>Find a mentor and send a short request</b><span>Choose one quick question, a few conversations, or regular guidance for a few months.</span></div></li>
+          <li><div><b>Talk here, at your own pace</b><span>Messages stay on this site. Share your mobile number only if and when you want to.</span></div></li>
+        </ol>
+      </div>
+      <div class="panel" id="login-panel">
+        <h2>Log in</h2>
+        <form id="login-form" novalidate>
+          <label class="field"><span>Your registered email</span>
+            <input type="email" id="email" autocomplete="email" inputmode="email" placeholder="name@example.com" required>
+            <small>The email address the OBA office has for you.</small>
+          </label>
+          <button class="btn btn-primary btn-block" id="send-code" type="submit">Email me a code</button>
+        </form>
+        <form id="code-form" novalidate hidden>
+          <p id="code-msg" class="notice ok"></p>
+          <label class="field"><span>6-digit code</span>
+            <input type="text" id="code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="\d{6}" placeholder="123456" style="font-size:1.4em;letter-spacing:.3em">
+          </label>
+          <button class="btn btn-primary btn-block" type="submit">Log in</button>
+          <button class="btn btn-ghost" type="button" id="change-email">Use a different email</button>
+        </form>
+        <div id="login-err" class="notice err" hidden style="margin-top:10px"></div>
+        <p style="color:var(--ink-3);font-size:.9em;margin-top:14px">No code after 5 minutes? Check your spam folder, and make sure it is the email registered with the OBA. Not a life member yet? <a id="lm-link" href="#">Become one</a>; the mentors circle is open only to life members.</p>
+      </div>
+    </div>
+    <div class="panel" style="margin-bottom:24px">
+      <h2>Our promise to you</h2>
+      <ul class="promise">
+        <li><b>Only OBA life members</b> can see profiles or send messages. Nothing here is public.</li>
+        <li><b>Your email and phone stay private.</b> Others see your name, batch and what you choose to write.</li>
+        <li><b>Your mobile number is shared only by you,</b> one conversation at a time, and you can hide it again.</li>
+        <li><b>Pause or leave any time.</b> Leaving deletes your profile and the messages you wrote.</li>
+        <li><b>Be kind and respectful.</b> Any conversation can be reported to the OBA team, in confidence.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Logged-in view -->
+  <div id="view-in" hidden>
+    <div style="display:flex;align-items:center;gap:10px;margin-top:18px;flex-wrap:wrap">
+      <p style="margin:0;flex:1" id="hello"></p>
+      <button class="btn btn-ghost" id="logout" type="button">Log out</button>
+    </div>
+    <div class="m-tabs" role="tablist" aria-label="Mentors">
+      <button role="tab" id="tab-find" aria-controls="pane-find" aria-selected="true">Find a mentor</button>
+      <button role="tab" id="tab-inbox" aria-controls="pane-inbox" aria-selected="false">Inbox <span class="badge" id="unread" hidden></span></button>
+      <button role="tab" id="tab-profile" aria-controls="pane-profile" aria-selected="false">My profile</button>
+    </div>
+
+    <section id="pane-find" role="tabpanel" aria-labelledby="tab-find">
+      <div class="searchrow" style="margin-top:0">
+        <label class="sr-only" for="m-q">Search mentors</label>
+        <input type="search" id="m-q" placeholder="Search mentors">
+        <label class="sr-only" for="m-field">Area</label>
+        <select id="m-field" style="max-width:40%"><option value="">All areas</option></select>
+      </div>
+      <details class="panel" style="margin-bottom:14px">
+        <summary style="cursor:pointer;font-weight:700">Tips for a good first request</summary>
+        <ul style="color:var(--ink-2);margin:10px 0 0;padding-left:1.2em">
+          <li>Say who you are and where you are now, in two lines.</li>
+          <li>Ask one clear question, for example “Should I take the bank PO offer or wait for the PSC result?”</li>
+          <li>Mentors are volunteers. A quick question is easier to say yes to than a long commitment.</li>
+          <li>Say thank you, and close the conversation when you are done so they can help someone else.</li>
+        </ul>
+      </details>
+      <div id="mentor-list" class="mentor-list"></div>
+    </section>
+
+    <section id="pane-inbox" role="tabpanel" aria-labelledby="tab-inbox" hidden>
+      <div id="inbox"></div>
+      <div id="thread" hidden></div>
+    </section>
+
+    <section id="pane-profile" role="tabpanel" aria-labelledby="tab-profile" hidden>
+      <form id="profile-form" class="panel" novalidate>
+        <h2 id="profile-h">Your mentors profile</h2>
+        <p style="color:var(--ink-2)" id="profile-intro">Your name and batch come from the OBA records. Everything else is up to you.</p>
+
+        <fieldset style="border:0;padding:0;margin:0 0 16px">
+          <legend style="font-weight:700;margin-bottom:8px">How would you like to take part?</legend>
+          <div class="choice-grid">
+            <label class="choice"><input type="checkbox" id="p-mentor"><span><b>I can guide juniors</b><br><span style="color:var(--ink-3)">You appear in “Find a mentor”.</span></span></label>
+            <label class="choice"><input type="checkbox" id="p-mentee"><span><b>I would like guidance</b><br><span style="color:var(--ink-3)">You can send requests to mentors.</span></span></label>
+          </div>
+        </fieldset>
+
+        <div id="mentor-fields">
+          <div class="field"><span>Areas you can guide in (up to 4)</span><div class="checks" id="p-fields"></div></div>
+          <label class="field"><span>One line about you</span><input type="text" id="p-headline" maxlength="100" placeholder="e.g. Retired Colonel, now in HR at an IT firm in Kochi"></label>
+          <label class="field"><span>Organisation (optional)</span><input type="text" id="p-org" maxlength="100"></label>
+          <label class="field"><span>City (optional)</span><input type="text" id="p-city" maxlength="60"></label>
+          <div class="field"><span>I can help with</span><div class="checks" id="p-offers"></div></div>
+          <label class="field"><span>A few words for mentees (optional)</span><textarea id="p-bio" maxlength="800" style="min-height:100px" placeholder="Your path, what you enjoy helping with, the best time to reach you."></textarea></label>
+          <label class="field"><span>Time I can give</span>
+            <select id="p-avail">
+              <option>Quick questions only</option>
+              <option>About an hour a month</option>
+              <option>A few hours a month</option>
+            </select></label>
+          <div class="field"><span>How I like to talk</span><div class="checks" id="p-modes"></div></div>
+          <label class="field"><span>How many people I can guide at a time</span><input type="number" id="p-cap" min="1" max="10" value="3" inputmode="numeric" style="max-width:120px"></label>
+        </div>
+
+        <div id="mentee-fields">
+          <label class="field"><span>What would you like guidance on?</span><textarea id="p-seeking" maxlength="500" style="min-height:90px" placeholder="e.g. Preparing for SSB, choosing a branch after Class 12, moving from the Army to a corporate job."></textarea>
+            <small>Mentors see this when you send them a request.</small></label>
+        </div>
+
+        <label class="field"><span>Mobile number (optional)</span><input type="tel" id="p-phone" maxlength="20" autocomplete="tel" placeholder="+91 …">
+          <small>Never shown to anyone unless you tap “Share my mobile” inside a conversation.</small></label>
+
+        <label class="choice" style="margin-bottom:16px"><input type="checkbox" id="p-consent">
+          <span>I agree that OBA life members using this circle may see my name, batch and the details above, and that the OBA stores my messages here to run the service. I can pause or delete my profile at any time.</span></label>
+
+        <button class="btn btn-primary btn-block" type="submit">Save my profile</button>
+        <div id="profile-msg" style="margin-top:10px"></div>
+      </form>
+      <div class="panel" id="profile-actions" style="margin:16px 0 24px" hidden>
+        <h2>Pause or leave</h2>
+        <p style="color:var(--ink-2)">Pausing hides you from “Find a mentor”; your conversations stay. Leaving deletes your profile and every message you wrote.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn" id="pause" type="button">Pause my listing</button>
+          <button class="btn" id="delete-me" type="button" style="color:var(--red)">Delete my profile</button>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<dialog class="modal" id="req-dlg">
+  <form class="inner" id="req-form" method="dialog">
+    <h2 id="req-h">Ask for guidance</h2>
+    <p id="req-who" style="color:var(--ink-2)"></p>
+    <label class="field"><span>Topic</span><input type="text" id="req-topic" maxlength="120" placeholder="e.g. Preparing for the SSB interview" required></label>
+    <fieldset style="border:0;padding:0;margin:0 0 16px">
+      <legend style="font-weight:700;margin-bottom:8px">What are you asking for?</legend>
+      <div class="choice-grid" id="req-kinds"></div>
+    </fieldset>
+    <label class="field"><span>Your note to the mentor</span><textarea id="req-msg" maxlength="2000" placeholder="Two lines about you, and your question."></textarea></label>
+    <div id="req-err" class="notice err" hidden style="margin-bottom:10px"></div>
+    <div style="display:flex;gap:8px;justify-content:flex-end">
+      <button class="btn" value="cancel" formnovalidate>Cancel</button>
+      <button class="btn btn-primary" id="req-send" value="send">Send request</button>
+    </div>
+  </form>
+</dialog>
+
+<footer class="site wrap">
+  <p>Need help? Write to <a data-help-email href="#"></a>. <a href="privacy.html">Privacy</a></p>
+</footer>
+
+<nav class="tabbar" aria-label="Main">
+  <a href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>Bulletin</a>
+  <a href="share.html" class="tab-share"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg>Share</a>
+  <a href="mentors.html" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><circle cx="17" cy="9" r="2.4"/><path d="M15.5 14.2A4.5 4.5 0 0 1 21 18.5"/></svg>Mentors</a>
+</nav>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/mentors.js"></script>
+</body>
+</html>

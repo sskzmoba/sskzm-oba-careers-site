@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Past posts: SSKZM OBA Careers</title>
+<meta name="description" content="Closed jobs, exams and scholarships from earlier months, for reference.">
+<meta name="theme-color" content="#16235c">
+<meta property="og:title" content="SSKZM OBA Careers">
+<meta property="og:description" content="Open jobs, exams, scholarships and admissions for Kazaks. Share a notice in a minute.">
+<meta property="og:image" content="assets/img/school-900.jpg">
+<link rel="icon" href="assets/img/favicon-64.png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preload" href="assets/fonts/atkinson-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <img src="assets/img/oba-logo-96.png" alt="" width="40" height="40">
+      <span><b>Careers &amp; Mentors</b><small>SSKZM Old Boys Association</small></span>
+    </a>
+    <nav class="topnav" aria-label="Main">
+      <a href="index.html">Bulletin</a>
+      <a href="share.html">Share a notice</a>
+      <a href="mentors.html">Mentors</a>
+    </nav>
+    <button class="textsize" id="textsize" type="button" aria-pressed="false" aria-label="Make text bigger">A+</button>
+  </div>
+</header>
+<main class="wrap" id="main">
+  <section class="board-head">
+    <h1>Past posts</h1>
+    <p>Closed posts, kept for reference and grouped by the month they closed. Useful for knowing when a recruitment or scholarship usually comes up each year.</p>
+  </section>
+  <label class="field" style="max-width:320px;margin-top:16px"><span>Month</span><select id="month"><option value="">Loading…</option></select></label>
+  <label class="field" style="max-width:520px"><span>Search this month</span><input type="search" id="aq" placeholder="Search"></label>
+  <div class="list" id="alist"></div>
+</main>
+<footer class="site wrap">
+  <p>Need help? Write to <a data-help-email href="#"></a>. <a href="privacy.html">Privacy</a></p>
+</footer>
+
+<nav class="tabbar" aria-label="Main">
+  <a href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>Bulletin</a>
+  <a href="share.html" class="tab-share"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg>Share</a>
+  <a href="mentors.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><circle cx="17" cy="9" r="2.4"/><path d="M15.5 14.2A4.5 4.5 0 0 1 21 18.5"/></svg>Mentors</a>
+</nav>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/common.js"></script>
+<script>
+(function () {
+  var O = window.OBA, el = O.el, $ = O.$, entries = [];
+  function draw() {
+    var box = O.clear($('#alist')), q = $('#aq').value.trim().toLowerCase();
+    var list = entries.filter(function (e) { return !q || [e.title, e.org, e.description].join(' ').toLowerCase().indexOf(q) !== -1; });
+    if (!list.length) { box.appendChild(el('div', { class: 'empty' }, el('p', { text: 'Nothing here.' }))); return; }
+    list.sort(function (a, b) { return (b.expiry_date || '').localeCompare(a.expiry_date || ''); });
+    list.forEach(function (e) {
+      var sec = O.SECTIONS[e.section] || { long: '' };
+      box.appendChild(el('article', { class: 'post', 'data-section': e.section, style: 'grid-template-columns:1fr' },
+        el('div', { class: 'post-body' },
+          el('div', { class: 'kind' }, el('span', { text: sec.long }), el('span', { class: 'exp', text: 'Closed ' + O.niceDate(e.expiry_date) })),
+          el('h3', { text: e.title }), e.org ? el('div', { class: 'org', text: e.org }) : null,
+          el('p', { class: 'desc', text: e.description || '' }))));
+    });
+  }
+  function loadMonth(m) {
+    O.clear($('#alist')).appendChild(el('div', { class: 'skeleton' }));
+    O.apiGet({ action: 'archive', month: m }).then(function (r) { entries = (r && r.entries) || []; draw(); });
+  }
+  document.addEventListener('DOMContentLoaded', function () {
+    O.apiGet({ action: 'archive' }).then(function (r) {
+      var sel = O.clear($('#month')), months = (r && r.months) || [];
+      if (!months.length) { sel.appendChild(el('option', { value: '', text: 'No past posts yet' })); return; }
+      months.forEach(function (m) { var p = m.split('-'); sel.appendChild(el('option', { value: m, text: O.MONTHS[+p[1] - 1].charAt(0) + O.MONTHS[+p[1] - 1].slice(1).toLowerCase() + ' ' + p[0] })); });
+      loadMonth(months[0]);
+    }).catch(function () { O.clear($('#month')).appendChild(el('option', { text: 'Could not load' })); });
+    $('#month').addEventListener('change', function () { loadMonth(this.value); });
+    $('#aq').addEventListener('input', draw);
+  });
+})();
+</script>
+</body>
+</html>
