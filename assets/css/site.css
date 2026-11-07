@@ -296,7 +296,8 @@ input:focus, select:focus, textarea:focus { border-color: var(--sky); outline: n
 .mentor .bio { color: var(--ink-2); font-size: 0.95em; }
 .mentor .btn { margin-top: auto; }
 
-.inbox { display: grid; gap: 8px; }
+.inbox { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; }
+.inbox-item, .mentor, .post, .thread, .msgs { min-width: 0; }   /* long text wraps or truncates instead of widening the page */
 .inbox-item { display: flex; gap: 12px; align-items: center; width: 100%; text-align: left; background: var(--surface); border: 1px solid var(--line);
   border-radius: var(--radius); padding: 12px 14px; cursor: pointer; }
 .inbox-item .t { flex: 1; min-width: 0; }
