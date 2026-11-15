@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SSKZM OBA Careers: open jobs, exams and scholarships</title>
+<meta name="description" content="Current jobs, exam notices, scholarships and admissions for Sainik School Kazhakootam alumni, shared by Kazaks and checked every day.">
+<meta name="theme-color" content="#16235c">
+<meta property="og:title" content="SSKZM OBA Careers">
+<meta property="og:description" content="Open jobs, exams, scholarships and admissions for Kazaks. Share a notice in a minute.">
+<meta property="og:image" content="assets/img/school-900.jpg">
+<link rel="icon" href="assets/img/favicon-64.png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preload" href="assets/fonts/atkinson-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<a class="sr-only" href="#main">Skip to the posts</a>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <img src="assets/img/oba-logo-96.png" alt="" width="40" height="40">
+      <span><b>Careers &amp; Mentors</b><small>SSKZM Old Boys Association</small></span>
+    </a>
+    <nav class="topnav" aria-label="Main">
+      <a href="index.html" aria-current="page">Bulletin</a>
+      <a href="share.html">Share a notice</a>
+      <a href="mentors.html">Mentors</a>
+    </nav>
+    <button class="textsize" id="textsize" type="button" aria-pressed="false" aria-label="Make text bigger">A+</button>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+  <section class="board-head">
+    <h1>Openings for Kazaks</h1>
+    <p>Jobs, exams, scholarships and admissions, shared by fellow Kazaks and gathered every morning.</p>
+    <div class="board-meta" id="meta" aria-live="polite">Loading the latest posts…</div>
+  </section>
+
+  <div class="searchrow" role="search">
+    <label class="sr-only" for="q">Search posts</label>
+    <input id="q" type="search" placeholder="Search posts" autocomplete="off">
+    <button class="btn filter-toggle" id="filter-toggle" type="button" aria-expanded="false" aria-controls="filters">Filters</button>
+  </div>
+  <div class="chips" id="chips" role="group" aria-label="Show only"></div>
+
+  <div class="board">
+    <aside class="filters" id="filters" aria-label="Filters">
+      <h2>Narrow down</h2>
+      <fieldset>
+        <legend>Sort by</legend>
+        <label class="opt"><input type="radio" name="sort" value="closing" checked> Closing soonest</label>
+        <label class="opt"><input type="radio" name="sort" value="newest"> Newest first</label>
+      </fieldset>
+      <fieldset>
+        <legend>Where</legend>
+        <label class="opt"><input type="checkbox" id="f-kerala"> Kerala only</label>
+      </fieldset>
+      <fieldset id="f-exp">
+        <legend>Experience (jobs)</legend>
+      </fieldset>
+      <fieldset id="f-domain">
+        <legend>Field</legend>
+        <select id="domain"><option value="">All fields</option></select>
+      </fieldset>
+      <button class="btn btn-block" id="reset" type="button">Clear filters</button>
+    </aside>
+
+    <section aria-labelledby="posts-h">
+      <h2 id="posts-h" class="sr-only">Posts</h2>
+      <div class="list" id="list">
+        <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
+      </div>
+      <div class="share-strip" id="share-strip">
+        <p><strong>Seen a notice in the paper or on WhatsApp?</strong>Send a photo of it. We read it and post it here.</p>
+        <a class="btn" href="share.html">Share it</a>
+      </div>
+      <button class="btn load-more" id="more" type="button" hidden>Show more posts</button>
+      <p class="archive-link"><a href="archive.html">Past posts</a> are kept for reference, month by month.</p>
+    </section>
+  </div>
+</main>
+
+<footer class="site wrap">
+  <p>Run by volunteers of the SSKZM Old Boys Association. Posts are summarised automatically from official notices; always check the official notification before applying. Something wrong? Use “Report” on the post, or write to <a data-help-email href="#"></a>.</p>
+  <p><a href="privacy.html">Privacy</a></p>
+</footer>
+
+<nav class="tabbar" aria-label="Main">
+  <a href="index.html" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>Bulletin</a>
+  <a href="share.html" class="tab-share"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg>Share</a>
+  <a href="mentors.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><circle cx="17" cy="9" r="2.4"/><path d="M15.5 14.2A4.5 4.5 0 0 1 21 18.5"/></svg>Mentors</a>
+</nav>
+
+<dialog class="modal" id="report-dlg">
+  <form method="dialog" class="inner" id="report-form">
+    <h2>Report this post</h2>
+    <p id="report-title" style="color:var(--ink-2)"></p>
+    <div class="choice-grid" role="radiogroup" aria-label="What is wrong">
+      <label class="choice"><input type="radio" name="why" value="Looks fake or a scam" required> Looks fake or a scam</label>
+      <label class="choice"><input type="radio" name="why" value="Wrong details or date"> Wrong details or date</label>
+      <label class="choice"><input type="radio" name="why" value="Not career related"> Not career related</label>
+      <label class="choice"><input type="radio" name="why" value="Offensive"> Offensive</label>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:16px;justify-content:flex-end">
+      <button class="btn" value="cancel" formnovalidate>Cancel</button>
+      <button class="btn btn-primary" value="send">Send report</button>
+    </div>
+  </form>
+</dialog>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/bulletin.js"></script>
+</body>
+</html>
